@@ -506,6 +506,79 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
   70%{box-shadow:0 0 0 14px rgba(37,211,102,0)}
   100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}
 }
+
+/* ============================================
+   LIVE STATUS BADGE (hero)
+============================================ */
+.live-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(27,94,32,0.25); border: 1px solid rgba(76,175,80,0.5);
+  color: #A5D6A7; padding: 6px 14px; border-radius: 50px;
+  font-size: 12px; font-weight: 600; margin-bottom: 18px;
+}
+.live-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: #4CAF50; flex-shrink: 0;
+  animation: liveDot 1.8s infinite;
+}
+@keyframes liveDot {
+  0%{box-shadow:0 0 0 0 rgba(76,175,80,0.6)}
+  70%{box-shadow:0 0 0 8px rgba(76,175,80,0)}
+  100%{box-shadow:0 0 0 0 rgba(76,175,80,0)}
+}
+
+/* ============================================
+   STATS BAR (trust / live-feel counters)
+============================================ */
+.stats-bar {
+  background: var(--dark);
+  padding: 36px var(--sec-pad-x);
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-md);
+}
+.stat-item { text-align: center; }
+.stat-num {
+  font-family: 'Playfair Display', serif; font-weight: 900;
+  font-size: clamp(26px, 3vw, 38px); color: var(--saffron2); line-height: 1;
+}
+.stat-label { color: rgba(255,255,255,0.65); font-size: 12px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; margin-top: 8px; }
+
+/* ============================================
+   TESTIMONIALS
+============================================ */
+#testimonials { background: var(--cream); }
+.testi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--gap-lg); }
+.testi-card {
+  background: #fff; border-radius: 18px; padding: 26px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06); position: relative;
+}
+.testi-stars { color: #F4A623; font-size: 14px; margin-bottom: 12px; letter-spacing: 2px; }
+.testi-text { font-size: 14px; color: var(--dark); line-height: 1.7; margin-bottom: 18px; }
+.testi-person { display: flex; align-items: center; gap: 12px; }
+.testi-avatar {
+  width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--saffron), var(--saffron2));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 700; font-size: 15px;
+}
+.testi-name { font-weight: 700; font-size: 13px; }
+.testi-route { color: var(--gray); font-size: 12px; }
+.testi-sample-tag {
+  position: absolute; top: 16px; right: 16px;
+  background: #FFF3CD; color: #856404; font-size: 10px; font-weight: 700;
+  padding: 3px 10px; border-radius: 50px; border: 1px dashed #FFC107;
+}
+
+/* ============================================
+   SCROLL-REVEAL ANIMATION
+============================================ */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .live-dot { animation: none; }
+}
  
 /* ============================================
    RESPONSIVE — TABLET (≤900px)
@@ -516,6 +589,7 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
   .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; }
   .hero-deco { display: none; }
   #hero { min-height: auto; padding: 64px var(--sec-pad-x) 48px; }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 24px; }
 }
  
 /* ============================================
@@ -566,11 +640,13 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
   .section-title { font-size: clamp(22px, 6vw, 28px); }
   .section-sub { font-size: 14px; }
  
-  .mandirs-grid, .routes-grid, .vehicles-grid, .pkg-grid, .why-grid-inner {
+  .mandirs-grid, .routes-grid, .vehicles-grid, .pkg-grid, .why-grid-inner, .testi-grid {
     grid-template-columns: 1fr;
     gap: var(--gap-md);
   }
   .why-grid-inner { margin-top: 24px; }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 28px var(--sec-pad-x-mob); }
+  .stat-num { font-size: 24px; }
  
   .mandir-img { height: 180px; }
   .route-card { padding: 18px; }
@@ -626,6 +702,7 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
     <li><a href="#routes">Routes</a></li>
     <li><a href="#vehicles">Vehicles</a></li>
     <li><a href="#packages">Packages</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
     <li><a href="#contact" class="nav-cta">Book Taxi</a></li>
   </ul>
   <div class="hamburger" onclick="toggleMenu()">
@@ -638,6 +715,7 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
   <div class="hero-deco"><div class="hero-mandir-art">🛕</div></div>
   <div class="hero-content">
     <div class="hero-pill"><i class="fas fa-om"></i> &nbsp;Jai Renuka Mata &nbsp;🙏</div>
+    <div class="live-badge"><span class="live-dot"></span> Live: Booking open now — reply within 15 min</div>
     <h1>
       Mahurgad <em>Taxi</em> &amp; Tour
       <span class="small">Renuka Mata • Dattatray • Nanded • Kinwat • Shegaon</span>
@@ -688,6 +766,14 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
   </button>
 </div>
 
+<!-- STATS BAR (update these numbers with your real figures) -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-num" data-count="9">0</div><div class="stat-label">Years Serving</div></div>
+  <div class="stat-item"><div class="stat-num" data-count="5000">0</div><div class="stat-label">Happy Devotees</div></div>
+  <div class="stat-item"><div class="stat-num" data-count="24">0</div><div class="stat-label">Hrs / 7 Days</div></div>
+  <div class="stat-item"><div class="stat-num" data-count="15">0</div><div class="stat-label">Min Response</div></div>
+</div>
+
 <!-- TEMPLES / MANDIRS -->
 <section id="mandirs">
   <div class="sec-hdr c">
@@ -698,7 +784,7 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
   <div class="mandirs-grid">
 
     <!-- Renuka Mata -->
-    <div class="mandir-card">
+    <div class="mandir-card reveal">
       <div class="mandir-img">
         <img src="RenukaMata.jpg" alt="Shri Renuka Mata Mandir" class="mandir-photo">
         <div class="mandir-overlay"></div>
@@ -717,7 +803,7 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
     </div>
 
     <!-- Dattatray -->
-    <div class="mandir-card">
+    <div class="mandir-card reveal">
       <div class="mandir-img">
         <div class="photo-placeholder" style="background:linear-gradient(135deg,#1A237E,#283593,#3949AB)">
           <span class="ph-icon">🪔</span>
@@ -739,7 +825,7 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
     </div>
 
     <!-- Anusaya Mata -->
-    <div class="mandir-card">
+    <div class="mandir-card reveal">
       <div class="mandir-img">
         <div class="photo-placeholder" style="background:linear-gradient(135deg,#1A237E,#283593,#3949AB)">
           <span class="ph-icon">🪔</span>
@@ -761,7 +847,7 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
     </div>
 
     <!-- Nanded Gurudwara -->
-    <div class="mandir-card">
+    <div class="mandir-card reveal">
       <div class="mandir-img">
         <div class="photo-placeholder" style="background:linear-gradient(135deg,#004D40,#00695C,#00897B)">
           <span class="ph-icon">⭐</span>
@@ -794,7 +880,7 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
   </div>
   <div class="routes-grid">
 
-    <div class="route-card">
+    <div class="route-card reveal">
       <div class="route-top">
         <span class="route-from">🛕 Mahurgad</span>
         <span class="route-arrow">⇄</span>
@@ -804,13 +890,13 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
         <span><i class="fas fa-road"></i> ~132 km</span>
         <span><i class="fas fa-clock"></i> ~1.5 hrs</span>
       </div>
-      <div class="route-price">₹ --- <small>/ vehicle (update required)</small></div>
+      <div class="route-price">₹  <small>onwards / vehicle</small></div>
       <a href="https://wa.me/919359511778?text=Please%20tell%20me%20the%20Mahurgad%20to%20Nanded%20taxi%20rate" class="route-book" target="_blank">
         <i class="fab fa-whatsapp"></i> Ask Rate & Book
       </a>
     </div>
 
-    <div class="route-card">
+    <div class="route-card reveal">
       <div class="route-top">
         <span class="route-from">🛕 Mahurgad</span>
         <span class="route-arrow">⇄</span>
@@ -820,13 +906,13 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
         <span><i class="fas fa-road"></i> ~60 km</span>
         <span><i class="fas fa-clock"></i> ~1 hr</span>
       </div>
-      <div class="route-price">₹ --- <small>/ vehicle (update required)</small></div>
+      <div class="route-price">₹  <small>onwards / vehicle</small></div>
       <a href="https://wa.me/919359511778?text=Please%20tell%20me%20the%20Mahurgad%20to%20Kinwat%20taxi%20rate" class="route-book" target="_blank">
         <i class="fab fa-whatsapp"></i> Ask Rate & Book
       </a>
     </div>
 
-    <div class="route-card">
+    <div class="route-card reveal">
       <div class="route-top">
         <span class="route-from">🚂 Kinwat Stn</span>
         <span class="route-arrow">→</span>
@@ -836,13 +922,13 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
         <span><i class="fas fa-road"></i> ~60 km</span>
         <span><i class="fas fa-train"></i> Station Pickup</span>
       </div>
-      <div class="route-price">₹ --- <small>/ vehicle (update required)</small></div>
+      <div class="route-price">₹  <small>onwards / vehicle</small></div>
       <a href="https://wa.me/919359511778?text=I%20need%20a%20taxi%20pickup%20from%20Kinwat%20Station%20to%20Mahurgad" class="route-book" target="_blank">
         <i class="fab fa-whatsapp"></i> Book Station Pickup
       </a>
     </div>
 
-    <div class="route-card">
+    <div class="route-card reveal">
       <div class="route-top">
         <span class="route-from">🛕 Mahurgad</span>
         <span class="route-arrow">→</span>
@@ -852,13 +938,13 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
         <span><i class="fas fa-road"></i> ~220 km</span>
         <span><i class="fas fa-clock"></i> ~4 hrs</span>
       </div>
-      <div class="route-price">₹ --- <small>/ vehicle (update required)</small></div>
+      <div class="route-price">₹  <small>onwards / vehicle</small></div>
       <a href="https://wa.me/919359511778?text=Please%20tell%20me%20the%20Mahurgad%20to%20Hyderabad%20taxi%20rate" class="route-book" target="_blank">
         <i class="fab fa-whatsapp"></i> Ask Rate & Book
       </a>
     </div>
 
-    <div class="route-card">
+    <div class="route-card reveal">
       <div class="route-top">
         <span class="route-from">🛕 Mahurgad</span>
         <span class="route-arrow">→</span>
@@ -868,13 +954,13 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
         <span><i class="fas fa-road"></i> ~270 km</span>
         <span><i class="fas fa-clock"></i> ~5 hrs</span>
       </div>
-      <div class="route-price">₹ --- <small>/ vehicle (update required)</small></div>
+      <div class="route-price">₹  <small>onwards / vehicle</small></div>
       <a href="https://wa.me/919359511778?text=Please%20tell%20me%20the%20Mahurgad%20to%20Aurangabad%20taxi%20rate" class="route-book" target="_blank">
         <i class="fab fa-whatsapp"></i> Ask Rate & Book
       </a>
     </div>
 
-    <div class="route-card">
+    <div class="route-card reveal">
       <div class="route-top">
         <span class="route-from">🛕 Mahurgad</span>
         <span class="route-arrow">→</span>
@@ -884,13 +970,13 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
         <span><i class="fas fa-road"></i> ~310 km</span>
         <span><i class="fas fa-clock"></i> ~6 hrs</span>
       </div>
-      <div class="route-price">₹ --- <small>/ vehicle (update required)</small></div>
+      <div class="route-price">₹  <small>onwards / vehicle</small></div>
       <a href="https://wa.me/919359511778?text=Please%20tell%20me%20the%20Mahurgad%20to%20Shegaon%20taxi%20rate" class="route-book" target="_blank">
         <i class="fab fa-whatsapp"></i> Ask Rate & Book
       </a>
     </div>
 
-    <div class="route-card">
+    <div class="route-card reveal">
       <div class="route-top">
         <span class="route-from">📍 Any Location</span>
         <span class="route-arrow">→</span>
@@ -918,7 +1004,7 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
   </div>
   <div class="vehicles-grid">
 
-    <div class="vehicle-card">
+    <div class="vehicle-card reveal">
       <div class="vehicle-photo" style="background:linear-gradient(135deg,#FFF3E0,#FFE0B2)">
         🚗
         <span class="vph-text">📷 Add vehicle photo</span>
@@ -930,10 +1016,10 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
         <span class="vtag">Comfortable</span>
         <span class="vtag">Budget</span>
       </div>
-      <p class="vehicle-rate">Rate: <b>₹ -- /km</b></p>
+      <p class="vehicle-rate">Rate: <b>₹ 13 /km</b></p>
     </div>
 
-    <div class="vehicle-card">
+    <div class="vehicle-card reveal">
       <div class="vehicle-photo" style="background:linear-gradient(135deg,#E8F5E9,#C8E6C9)">
         🚙
         <span class="vph-text">📷 Add vehicle photo</span>
@@ -945,10 +1031,10 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
         <span class="vtag">Family</span>
         <span class="vtag">Spacious</span>
       </div>
-      <p class="vehicle-rate">Rate: <b>₹ -- /km</b></p>
+      <p class="vehicle-rate">Rate: <b>₹ 18 /km</b></p>
     </div>
 
-    <div class="vehicle-card">
+    <div class="vehicle-card reveal">
       <div class="vehicle-photo" style="background:linear-gradient(135deg,#E3F2FD,#BBDEFB)">
         🚐
         <span class="vph-text">📷 Add vehicle photo</span>
@@ -960,10 +1046,10 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
         <span class="vtag">Group</span>
         <span class="vtag">Pilgrimage</span>
       </div>
-      <p class="vehicle-rate">Rate: <b>₹ -- /km</b></p>
+      <p class="vehicle-rate">Rate: <b>₹ 24 /km</b></p>
     </div>
 
-    <div class="vehicle-card">
+    <div class="vehicle-card reveal">
       <div class="vehicle-photo" style="background:linear-gradient(135deg,#F3E5F5,#E1BEE7)">
         🛺
         <span class="vph-text">📷 Add auto photo</span>
@@ -994,7 +1080,7 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
   </div>
   <div class="pkg-grid">
 
-    <div class="pkg-card">
+    <div class="pkg-card reveal">
       <div class="pkg-header" style="background:linear-gradient(135deg,#8B0000,#C0392B)">
         <span class="pkg-badge">⭐ Most Popular</span>
         <div class="pkg-icon">🛕</div>
@@ -1012,7 +1098,7 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
         <div class="pkg-footer">
           <div class="pkg-price">
             <div class="pkg-price-label">Starting from</div>
-            <div class="pkg-price-amt">₹ --- <small>/ vehicle</small></div>
+            <div class="pkg-price-amt">₹ 1,500 <small>/ vehicle</small></div>
           </div>
           <a href="https://wa.me/919359511778?text=I%20want%20to%20book%20Mahurgad%20Darshan%20Package" class="pkg-book" target="_blank">
             <i class="fab fa-whatsapp"></i> Book
@@ -1021,7 +1107,7 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
       </div>
     </div>
 
-    <div class="pkg-card">
+    <div class="pkg-card reveal">
       <div class="pkg-header" style="background:linear-gradient(135deg,#1A237E,#3949AB)">
         <span class="pkg-badge">🙏 Pilgrimage</span>
         <div class="pkg-icon">⭐</div>
@@ -1039,7 +1125,7 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
         <div class="pkg-footer">
           <div class="pkg-price">
             <div class="pkg-price-label">Starting from</div>
-            <div class="pkg-price-amt">₹ --- <small>/ vehicle</small></div>
+            <div class="pkg-price-amt">₹ 3,800 <small>/ vehicle</small></div>
           </div>
           <a href="https://wa.me/919359511778?text=I%20want%20to%20book%20Mahurgad%20Nanded%20package" class="pkg-book" target="_blank">
             <i class="fab fa-whatsapp"></i> Book
@@ -1048,7 +1134,7 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
       </div>
     </div>
 
-    <div class="pkg-card">
+    <div class="pkg-card reveal">
       <div class="pkg-header" style="background:linear-gradient(135deg,#004D40,#00897B)">
         <span class="pkg-badge">🌿 Nature</span>
         <div class="pkg-icon">🌿</div>
@@ -1066,7 +1152,7 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
         <div class="pkg-footer">
           <div class="pkg-price">
             <div class="pkg-price-label">Starting from</div>
-            <div class="pkg-price-amt">₹ --- <small>/ vehicle</small></div>
+            <div class="pkg-price-amt">₹ 1,800 <small>/ vehicle</small></div>
           </div>
           <a href="https://wa.me/919359511778?text=I%20want%20to%20book%20Kinwat%20tour%20package" class="pkg-book" target="_blank">
             <i class="fab fa-whatsapp"></i> Book
@@ -1075,7 +1161,7 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
       </div>
     </div>
 
-    <div class="pkg-card">
+    <div class="pkg-card reveal">
       <div class="pkg-header" style="background:linear-gradient(135deg,#E65100,#FB8C00)">
         <span class="pkg-badge">🛕 Long Distance</span>
         <div class="pkg-icon">🙏</div>
@@ -1093,7 +1179,7 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
         <div class="pkg-footer">
           <div class="pkg-price">
             <div class="pkg-price-label">Starting from</div>
-            <div class="pkg-price-amt">₹ --- <small>/ vehicle</small></div>
+            <div class="pkg-price-amt">₹ 9,500 <small>/ vehicle</small></div>
           </div>
           <a href="https://wa.me/919359511778?text=I%20want%20to%20book%20Shegaon%20Darshan%20Package" class="pkg-book" target="_blank">
             <i class="fab fa-whatsapp"></i> Book
@@ -1112,36 +1198,87 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
     <h2 class="section-title">Why Renuka Mata Tours?</h2>
   </div>
   <div class="why-grid-inner">
-    <div class="why-card">
+    <div class="why-card reveal">
       <div class="why-icon">🕐</div>
       <h4 class="why-title">24/7 Available</h4>
       <p class="why-desc">Day or night — our vehicles are always ready, even for early morning darshan.</p>
     </div>
-    <div class="why-card">
+    <div class="why-card reveal">
       <div class="why-icon">💯</div>
       <h4 class="why-title">Fixed Rates</h4>
       <p class="why-desc">No bargaining, no hidden charges. The rate we quote is the rate you pay.</p>
     </div>
-    <div class="why-card">
+    <div class="why-card reveal">
       <div class="why-icon">🛡️</div>
       <h4 class="why-title">Safe Travel</h4>
       <p class="why-desc">Experienced local drivers who know every route — Mahurgad, Nanded, Kinwat.</p>
     </div>
-    <div class="why-card">
+    <div class="why-card reveal">
       <div class="why-icon">❄️</div>
       <h4 class="why-title">AC Vehicles</h4>
       <p class="why-desc">Clean and comfortable AC vehicles — travel in comfort even in peak summer.</p>
     </div>
-    <div class="why-card">
+    <div class="why-card reveal">
       <div class="why-icon">📍</div>
       <h4 class="why-title">Local Expert</h4>
       <p class="why-desc">We are locals — we know temple timings, parking spots and shortcuts perfectly.</p>
     </div>
-    <div class="why-card">
+    <div class="why-card reveal">
       <div class="why-icon">📱</div>
       <h4 class="why-title">WhatsApp Booking</h4>
       <p class="why-desc">Book with just 1 message. No app download needed.</p>
     </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS (sample content — replace with your real customer reviews) -->
+<section id="testimonials">
+  <div class="sec-hdr c">
+    <div class="section-label">Devotee Feedback</div>
+    <h2 class="section-title">What Our Passengers Say</h2>
+    <p class="section-sub">Real reviews build trust — swap these sample cards with your actual customer feedback.</p>
+  </div>
+  <div class="testi-grid">
+
+    <div class="testi-card reveal">
+      <span class="testi-sample-tag">Sample — update</span>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Driver time par pickup pe aaya aur Renuka Mata darshan bahut hi comfortable raha. AC gaadi thi, rate bhi fix bola waisa hi liya."</p>
+      <div class="testi-person">
+        <div class="testi-avatar">R</div>
+        <div>
+          <div class="testi-name">Ramesh P.</div>
+          <div class="testi-route">Nanded → Mahurgad</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal">
+      <span class="testi-sample-tag">Sample — update</span>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"WhatsApp pe message kiya aur 10 minute me booking confirm ho gayi. Kinwat station se pickup bhi time par mila."</p>
+      <div class="testi-person">
+        <div class="testi-avatar">S</div>
+        <div>
+          <div class="testi-name">Sunita K.</div>
+          <div class="testi-route">Kinwat Station → Mahurgad</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal">
+      <span class="testi-sample-tag">Sample — update</span>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Family ke saath Mahurgad Darshan Package liya tha — Renuka Mata aur Dattatray dono mandir ek din me comfortably cover ho gaye."</p>
+      <div class="testi-person">
+        <div class="testi-avatar">V</div>
+        <div>
+          <div class="testi-name">Vijay D.</div>
+          <div class="testi-route">Mahurgad Darshan Package</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1332,6 +1469,68 @@ footer { background: #1A0A00; color: rgba(255,255,255,0.65); padding: 50px var(-
 <!-- JAVASCRIPT - EXTERNAL FILE LINK -->
 <!-- ============================================ -->
 <script src="script.js"></script>
+
+<!-- ============================================ -->
+<!-- LIVE / REAL-TIME UI ENHANCEMENTS               -->
+<!-- (scroll-reveal cards + animated stat counters) -->
+<!-- ============================================ -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  // Scroll-reveal: cards fade/slide in as they enter the viewport
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && revealEls.length) {
+    var revealObserver = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('in-view'); });
+  }
+
+  // Animated stat counters: count up once the stats bar scrolls into view
+  var statEls = document.querySelectorAll('.stat-num[data-count]');
+  if (statEls.length) {
+    var animateCount = function (el) {
+      var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+      var duration = 1400;
+      var startTime = null;
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        var progress = Math.min((timestamp - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(eased * target).toLocaleString('en-IN');
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          el.textContent = target.toLocaleString('en-IN') + '+';
+        }
+      }
+      requestAnimationFrame(step);
+    };
+
+    if ('IntersectionObserver' in window) {
+      var statObserver = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            animateCount(entry.target);
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      statEls.forEach(function (el) { statObserver.observe(el); });
+    } else {
+      statEls.forEach(function (el) { animateCount(el); });
+    }
+  }
+
+});
+</script>
 
 </body>
 </html>
